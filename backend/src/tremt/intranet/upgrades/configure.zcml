@@ -14,19 +14,19 @@
         />
   </genericsetup:upgradeSteps>
 
-  <!-- Example upgrade step
   <genericsetup:upgradeSteps
       profile="tremt.intranet:default"
-      source="1000"
-      destination="1001"
+      source="20250923001"
+      destination="20250924001"
       >
     <genericsetup:upgradeDepends
-        title="Update registry value"
-        import_steps="plone.app.registry"
+        title="Fecha a intranet"
+        import_steps="workflow"
+        />
+    <upgradeStep
+        title="Atualiza o permissionamento com o novo workflow"
+        handler=".workflow.atualiza_permissoes"
         />
   </genericsetup:upgradeSteps>
-  -->
-
-  <!-- -*- extra stuff goes here -*- -->
 
 </configure>
