@@ -1,35 +1,13 @@
-from plone.dexterity.content import Container
-from plone.schema.email import Email
+from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from tremt.intranet import _
-from tremt.intranet.utils import validadores
 from zope import schema
-from zope.interface import implementer
+from zope.interface import provider
 
 
-class IArea(model.Schema):
-    """Definição de uma Área."""
-
-    model.fieldset(
-        "contato",
-        _("Contato"),
-        fields=[
-            "email",
-            "telefone",
-        ],
-    )
-    email = Email(
-        title=_("Email"),
-        required=True,
-        constraint=validadores.is_valid_email,
-    )
-
-    telefone = schema.TextLine(
-        title=_("Telefone"),
-        description=_("Informe o telefone de contato"),
-        required=False,
-        constraint=validadores.is_valid_telefone,
-    )
+@provider(IFormFieldProvider)
+class IEndereco(model.Schema):
+    """Provê campos de endereço."""
 
     model.fieldset(
         "endereco",
@@ -68,8 +46,3 @@ class IArea(model.Schema):
         required=False,
         default="",
     )
-
-
-@implementer(IArea)
-class Area(Container):
-    """Uma Área no TRE-MT."""
